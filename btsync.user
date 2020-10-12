@@ -1,9 +1,9 @@
 #!/bin/sh
 
-CONFIGDIR=~/.config/btsync
+CONFIGDIR=~/.config/resilio-sync
 CONFIG=$CONFIGDIR/config.json
 PIDFILE=$CONFIGDIR/btsync.pid
-NAME='Bittorrent Sync'
+NAME='Resilio Sync'
 
 if [ ! -f "$CONFIG" ]; then
 	echo "Writing configuration (by default to $CONFIG)" >&2
