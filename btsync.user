@@ -2,7 +2,7 @@
 
 CONFIGDIR=~/.config/resilio-sync
 CONFIG=$CONFIGDIR/config.json
-PIDFILE=$CONFIGDIR/btsync.pid
+PIDFILE=$CONFIGDIR/sync.pid
 NAME='Resilio Sync'
 
 if [ ! -f "$CONFIG" ]; then
