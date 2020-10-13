@@ -51,3 +51,5 @@ Resilio Sync includes a script to generate per-user configuration, usually at `/
 
 It can be used to e.g. adjust the Web UI port.
 
+When run without an existing configuration the aforementioned script will be invoked.
+
