@@ -7,7 +7,7 @@ NAME='Resilio Sync'
 
 if [ ! -f "$CONFIG" ]; then
 	echo "Writing configuration (by default to $CONFIG)" >&2
-	/etc/btsync/init_user_config.sh
+	/etc/resilio-sync/init_user_config.sh
 fi
 
 #exec /usr/bin/rslsync --config "$CONFIG"
