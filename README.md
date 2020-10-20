@@ -1,6 +1,8 @@
 # resiliosync-user
 Small script to run Resilio Sync (formerly Bittorrent Sync) as an unprivileged user using initscript-like syntax.
 
+Hint: Add `btsync.user start` to the list of programs to run on login (and `btsync.user stop` to the list of programs to run on logout if your DE supports it to have Resilio Sync running while you're logged in). 
+
 **NOTE**: For historic reasons the script is called `btsync.user`, if installed through the makefile an additional `rslsync.user` symbolic link will be created.
 
 **NOTE**: The `/sbin/start-stop-daemon` script is required to run this script.
