@@ -26,6 +26,10 @@ Stops a running instance.
 
 Displays running status, including the HTTP address of the Web UI.
 
+`$ btsync.user webui`
+
+Opens the Web UI on the default browser (uses `xdg-open`).
+
 ## Example output
 
 `$ btsync.user start`

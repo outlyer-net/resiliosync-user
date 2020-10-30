@@ -4,6 +4,7 @@ CONFIGDIR=~/.config/resilio-sync
 CONFIG=$CONFIGDIR/config.json
 PIDFILE=$CONFIGDIR/sync.pid
 NAME='Resilio Sync'
+BROWSER=xdg-open # may also use sensible-browser as abstraction
 
 if [ ! -f "$CONFIG" ]; then
 	echo "Writing configuration (by default to $CONFIG)" >&2
@@ -32,8 +33,12 @@ case "$1" in
 		"$0" start
 		exit $?
 		;;
+	webui)
+		exec "$BROWSER" `webui_address`
+		exit 2 # Shouldn't reach
+		;;
 	*)
-		echo "Usage: $0 <start|stop|status>" >&2
+		echo "Usage: $0 <start|stop|status|webui>" >&2
 		exit 1
 	;;
 esac
