@@ -2,10 +2,10 @@
 DESTDIR=
 prefix=/usr/local
 
-all: btsync.user
+all: btsync.user.sh
 
 install:
-	install -D -m755 btsync.user $(DESTDIR)$(prefix)/bin/btsync.user
+	install -D -m755 btsync.user.sh $(DESTDIR)$(prefix)/bin/btsync.user
 	test -L $(DESTDIR)$(prefix)/bin/rslsync.user \
 		|| ln -s btsync.user $(DESTDIR)$(prefix)/bin/rslsync.user
 
