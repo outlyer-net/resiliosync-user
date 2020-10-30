@@ -59,3 +59,14 @@ It can be used to e.g. adjust the Web UI port.
 
 When run without an existing configuration the aforementioned script will be invoked.
 
+# btsync.gui
+
+Also included here is the _`btsync.gui.bash`_ script which will try to open
+the WebUI in a browser in app mode.
+
+Unlike `btsync.user webui`, which uses `xdg-open` to launch the user's default browser,
+`btsync.gui` will try to use one of the known derivatives of Chromium (currently
+Chromium, Google Chrome and Microsoft Edge), since those have an _app mode_.
+
+As with `btsync.user`, if installing with the makefile, a corresponding `rslsync.gui` will
+be installed too.
