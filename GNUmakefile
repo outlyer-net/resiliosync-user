@@ -6,7 +6,8 @@ all: btsync.user
 
 install:
 	install -D -m755 btsync.user $(DESTDIR)$(prefix)/bin/btsync.user
-	ln -s btsync.user $(DESTDIR)$(prefix)/bin/rslsync.user
+	test -L $(DESTDIR)$(prefix)/bin/rslsync.user \
+		|| ln -s btsync.user $(DESTDIR)$(prefix)/bin/rslsync.user
 
 uninstall:
 	$(RM) $(DESTDIR)$(prefix)/bin/btsync.user \
