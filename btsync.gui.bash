@@ -9,6 +9,10 @@ BROWSER=
 
 rslsync_running() {
 	# kill -0 checks for a process running, XXX: not listed on signal(7) nor kill(1) (???)
+	#  found at <https://stackoverflow.com/questions/3043978/how-to-check-if-a-process-id-pid-exists>
+	#  NOTE it will fail if you don't have permission to send the signal, however for
+	#       this use case you should own the process
+	#       Alternatively ps -p $PID could be used
 	[[ -f "$PIDFILE" ]] && kill -0 $(cat "$PIDFILE")
 }
 
