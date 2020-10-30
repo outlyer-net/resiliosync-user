@@ -10,6 +10,18 @@ if [ ! -f "$CONFIG" ]; then
 	/etc/resilio-sync/init_user_config.sh
 fi
 
+webui_address() {
+
+	local protocol='http'
+	if grep -q '"force_https":\s*true' "$CONFIG" ; then
+		protocol='https'
+	fi
+
+	local url=`sed '/"listen"/!d;s/.*"\([.:0-9][.:0-9]*\)".*$/\1/' "$CONFIG"`
+
+	echo "$protocol://$url"
+}
+
 #exec /usr/bin/rslsync --config "$CONFIG"
 
 case "$1" in
@@ -34,8 +46,8 @@ RET=$?
 if [ "$action" = 'status' ] ; then
 	if [ $RET -eq 0 ]; then
 		echo "$NAME running with pid `cat $PIDFILE`"
-		echo -n "   Web UI listening on https://"
-		echo `sed '/"listen"/!d;s/.*"\([.:0-9][.:0-9]*\)".*$/\1/' "$CONFIG"`
+		echo -n "   Web UI listening on "
+		echo `webui_address`
 	else
 		echo "$NAME not running"
 	fi
