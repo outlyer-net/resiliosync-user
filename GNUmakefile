@@ -11,6 +11,6 @@ install:
 
 uninstall:
 	$(RM) $(DESTDIR)$(prefix)/bin/btsync.user \
-			$(RM) $(DESTDIR)$(prefix)/bin/rslsync.user
+			$(DESTDIR)$(prefix)/bin/rslsync.user
 	-rmdir -p $(DESTDIR)$(prefix)/bin
 
