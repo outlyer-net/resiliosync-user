@@ -33,7 +33,9 @@ webui_address() {
 		protocol='https'
 	fi
 
-	local url=`sed '/"listen"/!d;s/.*"\([.:0-9][.:0-9]*\)".*$/\1/' "$CONFIG"`
+	# strip comments in case they are present
+	local url=`sed -e '/^[[:space:]]*\/\/.*$/d' "$CONFIG" \
+	            | jq -r .webui.listen`
 
 	echo "$protocol://$url"
 }
