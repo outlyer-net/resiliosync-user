@@ -7,6 +7,17 @@ PIDFILE=$CONFIGDIR/sync.pid
 CHROMIUM_VARIANTS=( chromium google-chrome microsoft-edge microsoft-edge-dev )
 BROWSER=
 
+parse_configured_pid() {
+	# The configuration file may contain the path for the pid file
+	# as pid_file
+	local cfg_pid=`cat "$CONFIG" \
+		| sed '/^[[:space:]]*\/\/.*$/d' \
+		| jq -r .pid_file`
+	if [ -n "$cfg_pid" ]; then
+		PIDFILE="$cfg_pid"
+	fi
+}
+
 rslsync_running() {
 	# kill -0 checks for a process running, XXX: not listed on signal(7) nor kill(1) (???)
 	#  found at <https://stackoverflow.com/questions/3043978/how-to-check-if-a-process-id-pid-exists>
@@ -15,6 +26,10 @@ rslsync_running() {
 	#       Alternatively ps -p $PID could be used
 	[[ -f "$PIDFILE" ]] && kill -0 $(cat "$PIDFILE")
 }
+
+if [ -f "$CONFIG" ]; then
+	parse_configured_pid
+fi
 
 if ! rslsync_running ; then
 	echo "Couldn't detect Resilio Sync running" >&2

@@ -6,9 +6,24 @@ PIDFILE=$CONFIGDIR/sync.pid
 NAME='Resilio Sync'
 BROWSER=xdg-open # may also use sensible-browser as abstraction
 
+parse_configured_pid() {
+	# The configuration file may contain the path for the pid file
+	# as pid_file
+	# Strip comments in case the uses writes some. Resilio Sync
+	# seems to work fine with them but jq will not
+	local cfg_pid=`cat "$CONFIG" \
+		| sed '/^[[:space:]]*\/\/.*$/d' \
+		| jq -r .pid_file`
+	if [ -n "$cfg_pid" ]; then
+		PIDFILE="$cfg_pid"
+	fi
+}
+
 if [ ! -f "$CONFIG" ]; then
 	echo "Writing configuration (by default to $CONFIG)" >&2
 	/etc/resilio-sync/init_user_config.sh
+else
+	parse_configured_pid
 fi
 
 webui_address() {
