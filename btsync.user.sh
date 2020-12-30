@@ -60,6 +60,10 @@ case "$1" in
 	;;
 esac
 
+# resilio chokes on a symlinked config file, at least on my system,
+#  giving a parse error. Resolve it
+CONFIG="`readlink -f \"$CONFIG\"`"
+
 # btsync creates $PIDFILE but doesn't remove it
 /sbin/start-stop-daemon --$action --user "$USER" -v \
 	--pidfile "$PIDFILE" --remove-pidfile \
